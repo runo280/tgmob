@@ -16,7 +16,7 @@ def send_to_telegram(args):
     return requests.post(
         url='https://api.telegram.org/bot{0}/{1}'.format(bot_token, 'sendMessage'),
         data={'chat_id': channel_id, 'text': text_caps, 'parse_mode': 'HTML'}
-    ).json()
+    )
 
 
 if __name__ == '__main__':
