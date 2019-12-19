@@ -1,4 +1,4 @@
-name: Python application
+name: Publisher
 
 on:
   schedule:
