@@ -2,7 +2,7 @@ name: Python application
 
 on:
   schedule:
-    - cron:  '0 * * * *' # once an hour
+    - cron:  '0 6 * * *' # “At 06:00.”
   push:
     branches:
       - master
@@ -32,5 +32,4 @@ jobs:
           moburl: ${{ secrets.moburl }}
           moburl_base: ${{ secrets.moburl_base }}
         run: |
-          python main.py
           python bot.py
