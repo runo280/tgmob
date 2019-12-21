@@ -2,10 +2,10 @@ name: Publisher
 
 on:
   schedule:
-    - cron:  '0 6 * * *' # “At 06:00.”
-#  push:
-#    branches:
-#      - master
+    - cron:  '0 3 * * *' # “At 06:00.”
+  push:
+    branches:
+      - master
 
 jobs:
   build:
