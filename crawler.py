@@ -8,7 +8,7 @@ from bs4 import BeautifulSoup
 from post import Post
 
 baseUrl = os.environ['moburl']
-
+bad = ['icon pack', 'substratum', 'porn']
 
 def get_md5(arg):
     return hashlib.md5(arg.encode('utf-8')).hexdigest()
@@ -28,6 +28,8 @@ def parse():
                 if any(ext in new.find('small').text for ext in ['Today', 'Yesterday', 'minutes']):
                     link = new.find('a')
                     title = link.text
+                    if any(x in title.lower() for x in bad):
+                        continue
                     url = os.environ['moburl_base'] + link['href'][1:]
                     url = url[:url.rfind('&')]
                     new_post = Post(title, url)
