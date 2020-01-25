@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-import urllib.parse
 import pymongo
 
 db_url = 'mongodb+srv://{user}:{pwd}@{murl}/test?retryWrites=true&w=majority'
@@ -10,7 +9,6 @@ db_domain = os.environ['murl']
 db_name = 'm0bili'
 db_posts = 'posts'
 db_url = db_url.format(user=db_user, pwd=db_pass, murl=db_domain)
-db_url = urllib.parse.quote(db_url)
 client = pymongo.MongoClient(db_url)
 
 database = client[db_name]
