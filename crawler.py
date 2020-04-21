@@ -1,39 +1,27 @@
 # -*- coding: utf-8 -*-
-import hashlib
 import os
 
 import requests
-from bs4 import BeautifulSoup
 
+import db
 from post import Post
 
-baseUrl = os.environ['moburl']
-bad = ['icon pack', 'substratum', 'porn']
-
-def get_md5(arg):
-    return hashlib.md5(arg.encode('utf-8')).hexdigest()
+baseUrl = os.environ['base_url']
 
 
-def parse():
+def get_post_list():
     post_list = []
-    page = requests.get(baseUrl)
-    if page.status_code == 200:
-        soap = BeautifulSoup(page.text, 'html.parser')
-        main = soap.find('main', {'role': 'main'})
-        table = main.findAll('table')[1]
-        thread = table.find('tbody')
-        posts = thread.findAll('tr')
-        for new in posts:
-            if 'sticky' not in new['class']:
-                if any(ext in new.find('small').text for ext in ['Today', 'Yesterday', 'minutes']):
-                    link = new.find('a')
-                    title = link.text
-                    if any(x in title.lower() for x in bad):
-                        continue
-                    url = os.environ['moburl_base'] + link['href'][1:]
-                    url = url[:url.rfind('&')]
-                    new_post = Post(title, url)
-                    post_list.append(new_post)
-    else:
-        print('error')
+    for i in range(1, 5):
+        new = baseUrl + f"page/{i}/limit/10/orderby/date/desc/0"
+        page = requests.get(new)
+        if page.status_code == 200:
+            apps = page.json()['response']
+            for post in apps:
+                new_post = Post(post['id'], post)
+                post_list.append(new_post)
     return post_list
+
+
+if __name__ == '__main__':
+    fetched = get_post_list()
+    db.add_to_db(fetched)

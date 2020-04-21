@@ -4,8 +4,6 @@ import os
 import requests
 
 import db
-import market_link
-from post import Post
 
 bot_token = os.environ['bot_token']
 channel_id = os.environ['channel_id']
@@ -24,11 +22,11 @@ if __name__ == '__main__':
     query = {'ispub': False}
     published_query = {'$set': {'ispub': True}}
     for x in db.post_collection.find(query):
-        market_url = market_link.get_link(x['link'])
-        post = Post(x['title'], x['link'])
-        if market_url is None:
-            if send_to_telegram(post.get_message_html()).status_code == 200:
-                db.post_collection.update_one({'link': x['link']}, published_query)
-        else:
-            if send_to_telegram(post.get_message_html_with_market_link(market_url)).status_code == 200:
-                db.post_collection.update_one({'link': x['link']}, published_query)
+        json = x['json']
+        title = json['subject']
+        author = json['name']
+        desc = json['preview']
+        url = 'https://forum.mobilism.org' + json['browser_url']
+        message = f'<a href={url}>{title}</a><br><br><pre>{desc}</pre><br><br>by: <pre>{author}</pre>'
+        if send_to_telegram(message).status_code == 200:
+            db.post_collection.update_one({'pid': x['pid']}, published_query)

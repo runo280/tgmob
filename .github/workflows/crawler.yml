@@ -2,7 +2,7 @@ name: Crawler
 
 on:
   schedule:
-    - cron:  '0 * * * *' # once an hour
+    - cron:  '0 */4 * * *' # once an hour
   push:
     branches:
       - master
@@ -29,7 +29,5 @@ jobs:
           murl: ${{ secrets.murl }}
           bot_token: ${{ secrets.bot_token }}
           channel_id: ${{ secrets.channel_id }}
-          moburl: ${{ secrets.moburl }}
-          moburl_base: ${{ secrets.moburl_base }}
         run: |
-          python main.py
+          python crawler.py
