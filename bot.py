@@ -26,8 +26,9 @@ if __name__ == '__main__':
         author = json['name']
         desc = json['preview']
         url = 'https://forum.mobilism.org' + json['browser_url']
-        message = f'<a href={url}>{title}</a><br><br><pre>{desc}</pre><br><br>by: <pre>{author}</pre>'
+        message = f'<a href="{url}">{title}</a><br><br><pre>{desc}</pre><br><br>by: <pre>{author}</pre>'
         print(message)
         sent = send_to_telegram(message)
+        print(sent)
         if sent.status_code == 200:
             db.post_collection.update_one({'pid': x['pid']}, published_query)
