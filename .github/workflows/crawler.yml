@@ -27,6 +27,7 @@ jobs:
           muser: ${{ secrets.muser }}
           mpass: ${{ secrets.mpass }}
           murl: ${{ secrets.murl }}
+          base_url: ${{ secrets.base_url }}
           bot_token: ${{ secrets.bot_token }}
           channel_id: ${{ secrets.channel_id }}
         run: |
