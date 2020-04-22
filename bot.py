@@ -26,7 +26,11 @@ if __name__ == '__main__':
         author = json['name']
         desc = json['preview']
         url = 'https://forum.mobilism.org' + json['browser_url']
-        message = f'<a href="{url}">{title}</a><br><br><pre>{desc}</pre><br><br>by: <pre>{author}</pre>'
+        message = f'<a href="{url}">{title}</a>' \
+                  f"\n\n" \
+                  f'<pre>{desc}</pre>' \
+                  f"\n\n" \
+                  f'by: <pre>{author}</pre>'
         print(message)
         sent = send_to_telegram(message)
         print(sent)
