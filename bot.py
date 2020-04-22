@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import os
+import time
 
 import requests
 
@@ -36,3 +37,4 @@ if __name__ == '__main__':
         print(sent)
         if sent.status_code == 200:
             db.post_collection.update_one({'pid': x['pid']}, published_query)
+            time.sleep(3)
