@@ -8,7 +8,7 @@ import db
 
 bot_token = os.environ['bot_token']
 channel_id = os.environ['channel_id']
-
+bad = ['icon pack', 'substratum', 'porn']
 
 def send_to_telegram(text):
     return requests.post(
@@ -24,6 +24,8 @@ if __name__ == '__main__':
     for x in db.post_collection.find(query):
         json = x['json']
         title = json['subject']
+        if any(x in title.lower() for x in bad):
+            continue
         author = json['name']
         desc = json['preview']
         url = 'https://forum.mobilism.org' + json['browser_url']
