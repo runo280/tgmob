@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 import os
-
 import pymongo
 
 db_url = 'mongodb+srv://{user}:{pwd}@{murl}/test?retryWrites=true&w=majority'
