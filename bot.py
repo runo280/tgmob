@@ -7,7 +7,7 @@ import requests
 import db
 
 bot_token = os.environ['bot_token']
-channel_id = os.environ['channel_id']
+channel_id = '@' + os.environ['channel_id']
 bad = ['icon pack', 'substratum', 'porn']
 
 def send_to_telegram(text):
