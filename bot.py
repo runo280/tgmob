@@ -20,7 +20,7 @@ def send_to_telegram(text):
 if __name__ == '__main__':
 
     query = {'ispub': False}
-    published_query = {'$set': {'ispub': False}}
+    published_query = {'$set': {'ispub': True}}
     for x in db.post_collection.find(query):
         json = x['json']
         title = json['subject']
