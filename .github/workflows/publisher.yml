@@ -33,4 +33,6 @@ jobs:
           bot_token: ${{ secrets.bot_token }}
           channel_id: ${{ secrets.channel_id }}
         run: |
+          echo ${{secrets.base_url}}
           python bot.py
+          
