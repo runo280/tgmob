@@ -5,3 +5,4 @@ __pycache__
 db.txt
 .gitignore
 my.secrets
+Pipfile.lock
