@@ -32,5 +32,4 @@ jobs:
           base_url: ${{ secrets.base_url }}
           bot_token: ${{ secrets.bot_token }}
           channel_id: ${{ secrets.channel_id }}
-        run: |
-          python crawler.py
+        run: python crawler.py
