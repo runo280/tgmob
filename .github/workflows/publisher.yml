@@ -3,8 +3,6 @@ name: Publisher
 on:
   schedule:
     - cron:  '30 2 * * *' # “At 06:00.”
-  repository_dispatch:
-    types: run
   push:
     branches:
       - master
